@@ -65,7 +65,7 @@ while Game == rungame:
         pol[pchod] = 'o'    
         check_win()
     DrawBoard()
-#DrawBoard()
+DrawBoard()
 
 
 check_win()
