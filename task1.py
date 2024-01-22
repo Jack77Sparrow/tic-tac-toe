@@ -1,10 +1,13 @@
 import random
 import os
 import time
+import datetime
 pol = [' ',' ',' ',
        ' ',' ',' ',
        ' ',' ',' ', " "]
 Game = 0
+
+startgame = time.time()
 
 win = 1
 lose = -1
@@ -18,7 +21,7 @@ def DrawBoard():
     print(" %c | %c | %c " % (pol[4], pol[5], pol[6]))
     print("___|___|___")
     print(" %c | %c | %c " % (pol[7], pol[8], pol[9]))
-    print(" | | ")
+    print("   |   | ")
 def check_position(x):
     if pol[x] == ' ':
         return True
@@ -50,22 +53,50 @@ def check_win():
         Game = Draw
     else:
         Game = rungame
-while Game == rungame:
-    quadr = int(input("input from 1-9: "))
-    if check_position(quadr):
         
-        #pol[quadr] = 'x'
-        list_of_numbers.remove(quadr)
+
+
+def run_game():       
+    while Game == rungame:
+        quadr = int(input("input from 1-9: "))
         pchod = random.choice(list_of_numbers)
-        if quadr == pchod:
+        if check_position(quadr):
+
+            #pol[quadr] = 'x'
+            list_of_numbers.remove(quadr)
+            #pchod = random.choice(list_of_numbers)
+            # if quadr == pchod:
+            #     time.sleep(1)
+            #     pol[pchod] = 'o'
+            
+            time.sleep(1)
+            pol[quadr] = 'x'    
+            #pol[pchod] = 'o'
+            check_win()
+        if check_position(pchod):
+            list_of_numbers.remove(pchod)
             time.sleep(1)
             pol[pchod] = 'o'
-        time.sleep(1)
-        pol[quadr] = 'x'    
-        pol[pchod] = 'o'    
-        check_win()
-    DrawBoard()
-DrawBoard()
+                
+            check_win()
+        DrawBoard()
+        
+def start_game():
+    print("if you wana start game write [start]")
+    start = input()
+    
+    if start == "start":
+        
+        print("game is running: good luck)😃🤞")
+        run_game()
+    else:
+        print("please write [start] if you wana start game: ")
+        
+start_game()
 
 
-check_win()
+#run_game()
+#check_win()
+endgame= time.time()
+
+print(f"game is over on time {endgame-startgame:.2f}")
